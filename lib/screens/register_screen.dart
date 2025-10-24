@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'register_screen.dart';
-import 'forgot_password_screen.dart';
+import 'login_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   static const Color primary = Color(0xFF5A54D2);
 
@@ -23,7 +22,7 @@ class LoginScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   ClipPath(
-                    clipper: _LoginHeaderClipper(),
+                    clipper: _RegisterHeaderClipper(),
                     child: Container(
                       color: primary.withOpacity(0.85),
                       width: double.infinity,
@@ -41,9 +40,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   Align(
-                    alignment: Alignment(0, 0.3),
+                    alignment: const Alignment(0, 0.3),
                     child: Text(
-                      'Login here',
+                      'Create account',
                       style: theme.textTheme.titleLarge?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
@@ -61,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Welcome back you've\nbeen missed!",
+                    'Create an account  so you can\nexplore all',
                     textAlign: TextAlign.center,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: Colors.black87,
@@ -78,44 +77,19 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _LabeledField(
-                      hint: 'Email',
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    const SizedBox(height: 12),
-                    _LabeledField(
-                      hint: 'Password',
-                      obscure: true,
-                    ),
-                    const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => const ForgotPasswordScreen(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Forgot your password?',
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: Colors.black87,
-                            fontWeight: FontWeight.w600,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
+                  children: const [
+                    _LabeledField(hint: 'Email', keyboardType: TextInputType.emailAddress),
+                    SizedBox(height: 12),
+                    _LabeledField(hint: 'Password', obscure: true),
+                    SizedBox(height: 12),
+                    _LabeledField(hint: 'Confirm Password', obscure: true),
+                    SizedBox(height: 16),
                   ],
                 ),
               ),
             ),
 
-            // Bottom fixed area: Sign in, create account, social
+            // Bottom fixed area: Sign up, already have, social
             SafeArea(
               top: false,
               child: Padding(
@@ -137,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         onPressed: () {},
                         child: const Text(
-                          'Sign in',
+                          'Sign up',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w800,
@@ -156,12 +130,12 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => const RegisterScreen(),
+                            builder: (_) => const LoginScreen(),
                           ),
                         );
                       },
                       child: const Text(
-                        'Create new account',
+                        'Already have an account',
                         style: TextStyle(
                           color: Colors.black87,
                           decoration: TextDecoration.underline,
@@ -196,7 +170,7 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _LoginHeaderClipper extends CustomClipper<Path> {
+class _RegisterHeaderClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
@@ -227,7 +201,7 @@ class _LabeledField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
-        fillColor: const Color(0xFFFFF3EC), // soft peach-like fill
+        fillColor: const Color(0xFFFFF3EC),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
